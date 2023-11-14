@@ -75,4 +75,44 @@ function checkForWin(matrix) {
 
     // Check for vertical wins
     for (let j = 0; j < matrix[0].length; j++) {
-        const column = [matrix[0
+        const column = [matrix[0][j], matrix[1][j], matrix[2][j], matrix[3][j], matrix[4][j], matrix[5][j]];
+        if (checkRowWin(column)) {
+            return column[0];
+        }
+    }
+
+    return null; // No win
+}
+
+function checkRowWin(row) {
+    let currentSymbol = row[0];
+    let count = 1;
+
+    for (let i = 1; i < row.length; i++) {
+        if (row[i] === currentSymbol) {
+            count++;
+            if (count === 8) {
+                return true; // Win if there are 8 consecutive symbols
+            }
+        } else {
+            currentSymbol = row[i];
+            count = 1;
+        }
+    }
+
+    return false;
+}
+
+function calculateWinnings(winSymbol) {
+    const symbolValues = {
+        "😎": 100,
+        "😂": 50,
+        "🤣": 30,
+        "😍": 20,
+        "😘": 10,
+        "😅": 5,
+        // ... add other symbols as needed
+    };
+
+    return symbolValues[winSymbol] || 0;
+}
