@@ -1,4 +1,13 @@
 function spin() {
+    const spinCount = document.getElementById("spinCount").value || 1;
+    startSpin(spinCount);
+}
+
+function autoSpin(count) {
+    startSpin(count);
+}
+
+function startSpin(count) {
     const symbols = ["😎", "😂", "🤣", "😍", "😘", "😅", "🥰", "🤩", "😣", "🥱", "😴", "😛", "😜", "😭", "🤑"];
     const slot1 = document.getElementById("slot1");
     const slot2 = document.getElementById("slot2");
@@ -13,8 +22,10 @@ function spin() {
     slot2.classList.add("rolling");
     slot3.classList.add("rolling");
 
-    // Randomly select symbols for each slot after a delay
-    setTimeout(() => {
+    let spinsLeft = count;
+
+    function spinOnce() {
+        // Randomly select symbols for each slot
         const symbol1 = symbols[Math.floor(Math.random() * symbols.length)];
         const symbol2 = symbols[Math.floor(Math.random() * symbols.length)];
         const symbol3 = symbols[Math.floor(Math.random() * symbols.length)];
@@ -23,14 +34,6 @@ function spin() {
         slot1.textContent = symbol1;
         slot2.textContent = symbol2;
         slot3.textContent = symbol3;
-
-        // Remove the class to end the roll animation
-        slot1.classList.remove("rolling");
-        slot2.classList.remove("rolling");
-        slot3.classList.remove("rolling");
-
-        // Enable the button after the spin is complete
-        document.querySelector("button").disabled = false;
 
         // Check for a win
         if (symbol1 === symbol2 && symbol2 === symbol3) {
@@ -42,5 +45,23 @@ function spin() {
         } else {
             resultDiv.textContent = "Sorry, try again!";
         }
-    }, 2000); // Adjust the delay based on your animation duration
+
+        spinsLeft--;
+
+        if (spinsLeft > 0) {
+            // Continue spinning after a delay
+            setTimeout(spinOnce, 2000);
+        } else {
+            // Remove the class to end the roll animation
+            slot1.classList.remove("rolling");
+            slot2.classList.remove("rolling");
+            slot3.classList.remove("rolling");
+
+            // Enable the button after the spins are complete
+            document.querySelector("button").disabled = false;
+        }
+    }
+
+    // Start the first spin
+    spinOnce();
 }
