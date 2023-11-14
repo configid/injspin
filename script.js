@@ -45,25 +45,25 @@ function spinOnce() {
     }
 }
 
-function checkForWin(matrix) {
-    // Check for horizontal wins
-    for (let i = 0; i < matrix.length; i++) {
-        const row = matrix[i];
-        if (checkRowWin(row)) {
-            return row[0];
+function checkRowWin(row) {
+    let currentSymbol = row[0];
+    let count = 1;
+
+    for (let i = 1; i < row.length; i++) {
+        if (row[i] === currentSymbol) {
+            count++;
+            if (count === 8) {
+                return true; // Win if there are 8 consecutive symbols
+            }
+        } else {
+            currentSymbol = row[i];
+            count = 1;
         }
     }
 
-    // Check for vertical wins
-    for (let j = 0; j < matrix[0].length; j++) {
-        const column = [matrix[0][j], matrix[1][j], matrix[2][j]];
-        if (checkRowWin(column)) {
-            return column[0];
-        }
-    }
-
-    return null; // No win
+    return false;
 }
+
 
 function checkRowWin(row) {
     const symbolCount = {};
