@@ -13,6 +13,10 @@ body {
     align-items: center;
 }
 
+.slot-row {
+    display: flex;
+}
+
 .slot {
     font-size: 3em;
     margin: 10px;
