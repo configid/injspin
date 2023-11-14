@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spin Game</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Emoticon Slot Game</title>
 </head>
 <body>
-  <div class="container">
-    <div class="wheel" id="wheel"></div>
-    <button onclick="spinWheel()">Spin</button>
-  </div>
-  <script src="script.js"></script>
+    <div class="slot-machine">
+        <div class="slot" id="slot1">😎</div>
+        <div class="slot" id="slot2">😂</div>
+        <div class="slot" id="slot3">🤣</div>
+        <button onclick="spin()">Spin</button>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
